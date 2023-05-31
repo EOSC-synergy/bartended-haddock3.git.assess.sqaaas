@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/i-VRESSE/bartended-haddock3:
+      branch: main
+      repo: https://github.com/i-VRESSE/bartended-haddock3.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/i-VRESSE/bartended-haddock3 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-auburn-weasel.sh
+        container: qc.acc_scaly-tangerine-sponge
+  QC.Doc:
+    repos:
+      github.com/i-VRESSE/bartended-haddock3 find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-rose-molly.sh
+        container: qc.doc_crappy-champagne-numbat
+      github.com/i-VRESSE/bartended-haddock3 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-cerise-koala.sh
+        container: qc.doc_sickly-khaki-zebu
+      github.com/i-VRESSE/bartended-haddock3 markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-cornflower-kakapo.sh
+        container: qc.doc_bumpy-azure-zebra
+  QC.Lic:
+    repos:
+      github.com/i-VRESSE/bartended-haddock3 licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-sangria-moth.sh
+        container: qc.lic_skanky-khaki-kiwi
+  QC.Met:
+    repos:
+      github.com/i-VRESSE/bartended-haddock3 cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.hilly-chestnut-mongrel.sh
+        container: qc.met_bluesy-xanthic-budgerigar
+  QC.Sty:
+    repos:
+      github.com/i-VRESSE/bartended-haddock3 hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-azure-swan.sh
+        container: qc.sty_flimsy-goldenrod-dachshund
+      github.com/i-VRESSE/bartended-haddock3 jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-heliotrope-vulture.sh
+        container: qc.sty_tasty-cyan-hamster
+  QC.Ver:
+    repos:
+      github.com/i-VRESSE/bartended-haddock3 get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.grumpy-pumpkin-molly.sh
+        container: qc.ver_skimpy-white-peccary
+timeout: 5400
